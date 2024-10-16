@@ -1,0 +1,5 @@
+services:
+sysfoo:
+image: aensupriya/sysfoo:latest
+ports:
+- 8888:8080
