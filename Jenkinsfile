@@ -52,7 +52,7 @@ pipeline {
                   def commitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim().take(7)
                   // Build the Docker image with the short commit hash as tag
                   // replace xxxxxx with your docker hub username/org
-                  def dockerImage = docker.build("disha4091/sysfoo:${commitHash}", "./")
+                  def dockerImage = docker.build("aensupriya/sysfoo:${commitHash}", "./")
                   // Push the image tagged with the commit hash
                   dockerImage.push()
                   // Push additional standard tags if needed
