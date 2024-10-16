@@ -38,6 +38,16 @@ pipeline {
         echo 'package maven app'
         sh 'mvn package -DskipTests'
         archiveArtifacts 'target/*.jar'
+        script {
+          docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
+            def commitHash = env.GIT_COMMIT.take(7)
+            def dockerImage = docker.build("aensupriya/sysfoo:${commitHash}", "./")
+            dockerImage.push()
+            dockerImage.push("latest")
+            dockerImage.push("dev")
+          }
+        }
+
       }
     }
 
